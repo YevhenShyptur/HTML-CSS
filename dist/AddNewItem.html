@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="index.css">
+    <script src="main.js" text="javascript/text"></script>
+    <title>Internet Shop</title>
+</head>
+<body>
+    <div class="header "><a href="Index.html" class="HeaderLink"> HomePage MyShop</a>
+    <a href="#"> <img src="download.png" width="50" height="50" class="img"></a>
+   </div>
+   <div class="sidebar-and-container">
+   <div class="sidebar"> 
+       <ul class="sidebar-menu li">
+         <li><a href="#">All</a> </li>
+        <li><a href="#">Watches</a></li>
+        <li><a href="#">Mobile phones</a></li>
+        <li><a href="#">Audio</a></li>
+        <li><a href="#">Game gadgets</a></li>
+         <li><a href="AddNewItem.html">Add new</a></li>
+        </ul>
+    </div>
+    <div class="container">
+        <form action="" class="formadd">
+        <fieldset >
+          
+        <legend> Add new item </legend>
+       <p>Name: <input type="text" id="name"></p>
+      
+       
+       <p>Image <input type="file" id="img"></p>
+       <p>Description: <input  type="text" size="50" maxlength="500" id="description"></p>
+       <p>Price: <input type="text" id="price" ></p>
+       <label for="cars">Choose a category:</label>
+       <select name="category" id="category">
+        <option value="Watches">Watches</option>
+        <option value="Mobile phones">Mobile phones</option>
+        <option value="Audio">Audio</option>
+        <option value="Game gadgets">Game gadgets</option>
+      </select>
+       <button type="button" value=" ADD new item"  class="button" id="buttonAdd" onclick="addtoStorage()"></button>
+   
+    </fieldset>
+    </form></div>  
+</div>
+    <div class="footer"> Footer</div>
+</body>
+</html>
