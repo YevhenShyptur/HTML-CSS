@@ -1,14 +1,21 @@
 const { forEach, max } = require("lodash");
 const prodactListKey = 'ProductList';
 const prodactListKeyInBasket = 'ProductListInBasket';
+
+
 const addtoStorage = () => {
     let name = document.getElementById('name');
     let description = document.getElementById('description');
     let category = document.getElementById('category');
     let img = document.getElementById('img');
     let price = document.getElementById('price');
+
     let id = GetNextIdValueFromLocalStorage();
+    //console.log(id);
+
     let data = GetDataFromLocalStorage();
+    console.log(data);
+    console.log(name.value)
     data.push({ id: id, name: name.value, category: category.value, description: description.value, price: price.value, img: img.value });
     window.localStorage.setItem(prodactListKey, JSON.stringify(data));
 }
@@ -21,6 +28,8 @@ const GetNextIdValueFromSessionStorage = () => {
     return maxid + 1;
 }
 window.addtoStorage = addtoStorage;
+
+//module.exports={GetDataFromSessionStorage};
 
 const GetDataFromSessionStorage = () => {
     let data = [];
@@ -41,7 +50,7 @@ const GetNextIdValueFromLocalStorage = () => {
 }
 
 function AddToBasket(idfrombutton) {
-    let id = GetNextIdValueFromSessionStorage();
+    // let id = GetNextIdValueFromSessionStorage();
     let dataItemFromStorage = GetItemFromStorage(idfrombutton);
     let getDataFromSessionStorage = GetDataFromSessionStorage();
     getDataFromSessionStorage.push({
@@ -53,62 +62,72 @@ function AddToBasket(idfrombutton) {
         img: dataItemFromStorage[0].img
     });
     window.sessionStorage.setItem(prodactListKeyInBasket, JSON.stringify(getDataFromSessionStorage));
+    window.location.reload(true);
 }
 window.AddToBasket = addtoStorage;
 
-function getDataFromStorage() {
+function getDataFromStorage(categoryFromHTML) {
     let data = [];
     data = GetDataFromLocalStorage();
     const mydiv = document.getElementById('container')
     let datafromSession = GetDataFromSessionStorage();
+
+    let counter = document.createElement("div");
+    counter.classList.add('counter')
+    counter.innerHTML = `${datafromSession.length}`
+    document.body.appendChild(counter)
+
     data.forEach(item => {
+        if (item.category == categoryFromHTML || categoryFromHTML == "All") {
 
-        let newDivItem = document.createElement("div");
-        newDivItem.classList.add('item');
 
-        let nameDiv = document.createElement("div");
-        nameDiv.classList.add('item--name');
-        nameDiv.innerHTML = `${item.name}`;
-        newDivItem.appendChild(nameDiv);
+            let newDivItem = document.createElement("div");
+            newDivItem.classList.add('item');
 
-        let imgDiv = document.createElement("div");
-        imgDiv.classList.add('item--img');
-        let imgName = (item.img).substr(item.img.length - 12);
-        let image = document.createElement("img")
-        image.src = imgName;
-        image.classList.add('item--img');
-        imgDiv.appendChild(image);
-        newDivItem.appendChild(imgDiv);
+            let nameDiv = document.createElement("div");
+            nameDiv.classList.add('item--name');
+            nameDiv.innerHTML = `${item.name}`;
+            newDivItem.appendChild(nameDiv);
 
-        let descriptionDiv = document.createElement("div");
-        descriptionDiv.classList.add('item--description');
-        descriptionDiv.innerHTML = `${item.description}`;
-        newDivItem.appendChild(descriptionDiv);
+            let imgDiv = document.createElement("div");
+            imgDiv.classList.add('item--img');
+            let imgName = (item.img).substr(item.img.length - 12);
+            let image = document.createElement("img")
+            image.src = imgName;
+            image.classList.add('item--img');
+            imgDiv.appendChild(image);
+            newDivItem.appendChild(imgDiv);
 
-        let priceDiv = document.createElement("div");
-        priceDiv.classList.add('item--price');
-        priceDiv.innerHTML = `${item.price} $`;
-        newDivItem.appendChild(priceDiv);
-        let isInBasket = false;
-        datafromSession.forEach(element => {
-            if (element.id == item.id) {
-                isInBasket = true;
+            let descriptionDiv = document.createElement("div");
+            descriptionDiv.classList.add('item--description');
+            descriptionDiv.innerHTML = `${item.description}`;
+            newDivItem.appendChild(descriptionDiv);
+
+            let priceDiv = document.createElement("div");
+            priceDiv.classList.add('item--price');
+            priceDiv.innerHTML = `${item.price} $`;
+            newDivItem.appendChild(priceDiv);
+            let isInBasket = false;
+            datafromSession.forEach(element => {
+                if (element.id == item.id) {
+                    isInBasket = true;
+                }
+            });
+            let buttonDiv = document.createElement("div");
+            buttonDiv.classList.add('item--button-div');
+            let button = document.createElement("button");
+            button.classList.add('item--button');
+
+            if (isInBasket) {
+                button.innerText = 'In Basket';
+            } else {
+                button.addEventListener("click", () => AddToBasket(`${item.id}`));
+                button.innerText = 'Add To Basket';
             }
-        });
-        let buttonDiv = document.createElement("div");
-        buttonDiv.classList.add('item--button-div');
-        let button = document.createElement("button");
-        button.classList.add('item--button');
-
-        if (isInBasket) {
-            button.innerText = 'In Basket';
-        } else {
-            button.addEventListener("click", () => AddToBasket(`${item.id}`));
-            button.innerText = 'Add To Basket';
+            buttonDiv.appendChild(button);
+            newDivItem.appendChild(buttonDiv);
+            mydiv.appendChild(newDivItem);
         }
-        buttonDiv.appendChild(button);
-        newDivItem.appendChild(buttonDiv);
-        mydiv.appendChild(newDivItem);
     })
 }
 window.getDataFromStorage = getDataFromStorage;
@@ -166,3 +185,4 @@ function GetDataFromSession() {
     })
 }
 window.GetDataFromSession = GetDataFromSession;
+module.exports = { addtoStorage, GetNextIdValueFromLocalStorage, GetDataFromLocalStorage, prodactListKey };

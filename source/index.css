@@ -28,6 +28,7 @@ body {
 .sidebar-and-container {
   display: flex;
   flex-direction: row;
+  
 }
 .sidebar {
   width: 150px;
