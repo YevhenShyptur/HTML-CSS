@@ -179,10 +179,10 @@ function getDataFromStorage(categoryFromHTML:string) {
 function GetDataFromSession() {
     let data = [];
     data = GetDataFromSessionStorage();
-    const mydiv = document.getElementById('container')
+    const mydiv:HTMLElement|null = document.getElementById('container')
     data.forEach(item => {
 
-        let newDivItem = document.createElement("div");
+        let newDivItem:HTMLDivElement = document.createElement("div");
         newDivItem.classList.add('item');
 
         let nameDiv = document.createElement("div");
@@ -190,21 +190,21 @@ function GetDataFromSession() {
         nameDiv.innerHTML = `${item.name}`;
         newDivItem.appendChild(nameDiv);
 
-        let imgDiv = document.createElement("div");
+        let imgDiv:HTMLDivElement = document.createElement("div");
         imgDiv.classList.add('item--img');
-        let imgName = (item.img).substr(item.img.length - 12);
-        let image = document.createElement("img")
+        let imgName:string = (item.img).substr(item.img.length - 12);
+        let image: HTMLImageElement = document.createElement("img")
         image.src = imgName;
         image.classList.add('item--img');
         imgDiv.appendChild(image);
         newDivItem.appendChild(imgDiv);
 
-        let descriptionDiv = document.createElement("div");
+        let descriptionDiv:HTMLDivElement = document.createElement("div");
         descriptionDiv.classList.add('item--description');
         descriptionDiv.innerHTML = `${item.description}`;
         newDivItem.appendChild(descriptionDiv);
 
-        let priceDiv = document.createElement("div");
+        let priceDiv:HTMLDivElement = document.createElement("div");
         priceDiv.classList.add('item--price');
         priceDiv.innerHTML = `${item.price} $`;
         newDivItem.appendChild(priceDiv);
