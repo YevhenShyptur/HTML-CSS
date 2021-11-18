@@ -7,7 +7,7 @@
 const { jsxEmptyExpression } = require("@babel/types");
 const { ExpectationFailed } = require("http-errors");
 
-const { addtoStorage, GetNextIdValueFromLocalStorage, GetDataFromLocalStorage, prodactListKey } = require("../index.js");
+const { addtoStorage, GetNextIdValueFromLocalStorage, GetDataFromLocalStorage, prodactListKey } = require("../index.ts");
 //var Methods = require("../index.js");
 //jest.spyOn(Methods, 'GetNextIdValueFromLocalStorage').mockImplementation(_=>1);
 //jest.spyOn(Methods, 'GetDataFromLocalStorage').mockImplementation(_=>"");
