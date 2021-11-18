@@ -175,7 +175,7 @@ function GetDataFromSession() {
         descriptionDiv.classList.add('item--description');
         descriptionDiv.innerHTML = `${item.description}`;
         newDivItem.appendChild(descriptionDiv);
-
+//test brench
         let priceDiv = document.createElement("div");
         priceDiv.classList.add('item--price');
         priceDiv.innerHTML = `${item.price} $`;
