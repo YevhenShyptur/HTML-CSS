@@ -77,7 +77,7 @@ function AddToBasket(idfrombutton: number) {
     window.sessionStorage.setItem(prodactListKeyInBasket, JSON.stringify(getDataFromSessionStorage));
     window.location.reload();
 }
-(window as any).AddToBasket = addtoStorage;
+(window as any).AddToBasket = AddToBasket;
 
 function GetItemFromStorage(iditem: number) {
 

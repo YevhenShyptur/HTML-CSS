@@ -63,6 +63,7 @@ body {
   margin-left: 10px;
   margin-top: 10px;
   text-align: center;
+  border-radius: 20px;
 }
 .item--name {
   font-size: 2em;
@@ -91,6 +92,7 @@ body {
   width: 90%;
   margin-top: 10px;
   margin-left: 10px ;
+  border-radius: 5px;
 }
 .footer {
   display: flex;
